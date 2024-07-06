@@ -16,22 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         defaultValue: "pending",
       },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-      },
-      serviceId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Services",
-          key: "id",
-        },
-      },
     },
     {
       sequelize,
