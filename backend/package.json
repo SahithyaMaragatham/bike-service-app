@@ -31,6 +31,8 @@
     "content-type": "^1.0.5",
     "cookie": "^0.6.0",
     "cookie-signature": "^1.0.6",
+    "corps": "^0.1.0",
+    "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
     "d": "^1.0.2",
     "debug": "^2.6.9",
@@ -196,7 +198,6 @@
     "yargs": "^16.2.0",
     "yargs-parser": "^20.2.9"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

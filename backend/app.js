@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const sequelize = require("./config/database");
 const { syncModels } = require("./models");
 const userRoutes = require("./routes/userRoutes");
@@ -8,6 +9,14 @@ const bookingRoutes = require("./routes/bookingRoutes");
 require("dotenv").config();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(bodyParser.json());
 
