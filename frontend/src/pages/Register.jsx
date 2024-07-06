@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Appbar from "../component/Appbar";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -9,6 +10,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +28,7 @@ const Register = () => {
       setUser(response.data);
       setError(null);
       console.log("Registration successful:", response.data);
+      navigate("/")
     } catch (err) {
       setError(err.response?.data?.message || "An error occurred");
       console.error("Registration error:", err);
