@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Appbar from "../component/Appbar";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +39,7 @@ const Login = () => {
 
   return (
     <>
+    <Appbar></Appbar>
       <button type="button" onClick={handleAdminLogin}>
         ADMIN LOGIN
       </button>

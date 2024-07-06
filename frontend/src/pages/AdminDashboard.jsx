@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Appbar from "../component/Appbar";
 
 const AdminDashboard = () => {
   const [services, setServices] = useState([]);
@@ -65,6 +66,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
+      <Appbar></Appbar>
       <div>
         <h1>Services</h1>
         <ul>

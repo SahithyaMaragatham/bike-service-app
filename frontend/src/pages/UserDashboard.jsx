@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Appbar from "../component/Appbar";
 
 const UserDashboard = () => {
   const [services, setServices] = useState([]);
@@ -60,6 +61,7 @@ const UserDashboard = () => {
 
   return (
     <div>
+      <Appbar></Appbar>
       <h1>User Dashboard</h1>
       <div>
         <div>

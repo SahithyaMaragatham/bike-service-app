@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Appbar from "../component/Appbar";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -32,6 +33,7 @@ const Register = () => {
 
   return (
     <>
+    <Appbar></Appbar>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div>
