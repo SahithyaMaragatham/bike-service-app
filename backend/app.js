@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://bike-service-app000.netlify.app",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
