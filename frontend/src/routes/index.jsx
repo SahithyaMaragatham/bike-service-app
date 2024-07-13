@@ -31,8 +31,8 @@ const router = createBrowserRouter([
     element: <UserDashboard></UserDashboard>,
   },
     {
-    path: "/*",
-    element: <Navigate to="/" replace />,
+    path: "*",
+    element: <Navigate to="/login" replace />,
   },
 ]);
 
