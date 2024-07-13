@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://main--bike-service-app000.netlify.app"
+    origin: "https://main--bike-service-app000.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
