@@ -1,4 +1,4 @@
-![Screenshot (158)](https://github.com/user-attachments/assets/6d46fb4e-6288-4fb4-814a-f4b909de788c)# Bike Service Application
+# Bike Service Application
 
 ## Overview
 
