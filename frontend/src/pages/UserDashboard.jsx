@@ -61,41 +61,53 @@ const UserDashboard = () => {
 
   return (
     <div>
-      <Appbar></Appbar>
-      <h1>User Dashboard</h1>
-      <div>
-        <div>
-          <h2>Available Services</h2>
-          {services.length === 0 ? (
-            <p>No services available</p>
-          ) : (
-            <ul>
-              {services.map((service) => (
-                <li key={service.id}>
-                  {service.name} - {service.description} - ${service.price}
-                  <button onClick={() => handleBookService(service.id)}>
-                    Book
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <div>
-          <h2>Previous Bookings</h2>
-          {bookings.length === 0 ? (
-            <p>No previous bookings</p>
-          ) : (
-            <ul>
-              {bookings.map((booking) => (
-                <li key={booking.id}>
-                  Service: {booking.Service.name}, Date:{" "}
-                  {new Date(booking.date).toLocaleString()}, Status:{" "}
-                  {booking.status}
-                </li>
-              ))}
-            </ul>
-          )}
+      <Appbar />
+      <div className="container mt-5">
+        <h1 className="text-center">User Dashboard</h1>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <div className="row">
+          <div className="col-md-6 mb-4">
+            <h2>Available Services</h2>
+            {services.length === 0 ? (
+              <p>No services available</p>
+            ) : (
+              <div className="list-group">
+                {services.map((service) => (
+                  <div key={service.id} className="list-group-item flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                      <h5 className="mb-1">{service.name}</h5>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => handleBookService(service.id)}
+                      >
+                        Book
+                      </button>
+                    </div>
+                    <p className="mb-1">{service.description}</p>
+                    <small>${service.price}</small>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="col-md-6">
+            <h2>Previous Bookings</h2>
+            {bookings.length === 0 ? (
+              <p>No previous bookings</p>
+            ) : (
+              <div className="list-group">
+                {bookings.map((booking) => (
+                  <div key={booking.id} className="list-group-item flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                      <h5 className="mb-1">Service: {booking.Service.name}</h5>
+                    </div>
+                    <p className="mb-1">Date: {new Date(booking.date).toLocaleString()}</p>
+                    <small>Status: {booking.status}</small>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
