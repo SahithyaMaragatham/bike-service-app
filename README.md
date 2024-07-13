@@ -27,6 +27,7 @@ Welcome to the Bike Service Application, designed to streamline operations for b
 - Booking Status: View the status of their bookings.
 - Booking History: See all previous bookings.
 - Email Notifications: Receive an email when their bike is ready for delivery.
+  
 ![Screenshot (158)](https://github.com/user-attachments/assets/c2ef50f0-9ed1-4f42-a977-13f876c115e7)
 
 ![Screenshot (159)](https://github.com/user-attachments/assets/b4468bfa-9ef6-4518-a08a-267b3d5758bc)
