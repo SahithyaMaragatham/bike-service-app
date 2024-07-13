@@ -28,7 +28,7 @@ const Register = () => {
       setUser(response.data);
       setError(null);
       console.log("Registration successful:", response.data);
-      navigate("/")
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "An error occurred");
       console.error("Registration error:", err);
@@ -37,60 +37,76 @@ const Register = () => {
 
   return (
     <>
-    <Appbar></Appbar>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+      <Appbar />
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card">
+              <div className="card-body">
+                <h1 className="card-title text-center">Register</h1>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="username">Username:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group mt-3">
+                    <label htmlFor="email">Email:</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group mt-3">
+                    <label htmlFor="mobile">Mobile:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="mobile"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group mt-3">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary mt-4 w-100">
+                    Register
+                  </button>
+                </form>
+                {error && <p className="text-danger mt-3">{error}</p>}
+                {user && (
+                  <div className="mt-4">
+                    <h2>Registration successful!</h2>
+                    <p>Username: {user.username}</p>
+                    <p>Email: {user.email}</p>
+                    <p>Mobile: {user.mobile}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="mobile">Mobile:</label>
-          <input
-            type="text"
-            id="mobile"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {user && (
-        <div>
-          <h2>Registration successful!</h2>
-          <p>Username: {user.username}</p>
-          <p>Email: {user.email}</p>
-          <p>Mobile: {user.mobile}</p>
-        </div>
-      )}
+      </div>
     </>
   );
 };
