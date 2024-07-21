@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Appbar from "../component/Appbar";
+import { URL } from "../constants";
 
 const AdminDashboard = () => {
   const [services, setServices] = useState([]);
@@ -18,49 +19,34 @@ const AdminDashboard = () => {
   }, []);
 
   const fetchServices = async () => {
-    const response = await axios.get(
-      "https://bike-service-app-ahz1.onrender.com/api/services"
-    );
+    const response = await axios.get(`${URL}/api/services`);
     setServices(response.data);
   };
 
   const fetchBookings = async () => {
-    const response = await axios.get(
-      "https://bike-service-app-ahz1.onrender.com/api/bookings"
-    );
+    const response = await axios.get(`${URL}/api/bookings`);
     setBookings(response.data);
   };
 
   const handleAddService = async () => {
-    await axios.post(
-      "https://bike-service-app-ahz1.onrender.com/api/services",
-      newService
-    );
+    await axios.post(`${URL}/api/services`, newService);
     fetchServices();
     setNewService({ name: "", description: "", price: "" });
   };
 
   const handleEditService = async () => {
-    await axios.put(
-      `https://bike-service-app-ahz1.onrender.com/api/services/${editService.id}`,
-      editService
-    );
+    await axios.put(`${URL}/api/services/${editService.id}`, editService);
     fetchServices();
     setEditService(null);
   };
 
   const handleDeleteService = async (id) => {
-    await axios.delete(
-      `https://bike-service-app-ahz1.onrender.com/api/services/${id}`
-    );
+    await axios.delete(`${URL}/api/services/${id}`);
     fetchServices();
   };
 
   const handleUpdateBookingStatus = async (bookingId, status) => {
-    await axios.put(
-      "https://bike-service-app-ahz1.onrender.com/api/bookings/status",
-      { bookingId, status }
-    );
+    await axios.put(`${URL}/api/bookings/status`, { bookingId, status });
     fetchBookings();
   };
 
@@ -74,15 +60,28 @@ const AdminDashboard = () => {
             <h2>Services</h2>
             <ul className="list-group">
               {services.map((service) => (
-                <li key={service.id} className="list-group-item d-flex justify-content-between align-items-center">
+                <li
+                  key={service.id}
+                  className="list-group-item d-flex justify-content-between align-items-center"
+                >
                   <div>
                     <h5 className="mb-1">{service.name}</h5>
                     <p className="mb-1">{service.description}</p>
                     <small>${service.price}</small>
                   </div>
                   <div>
-                    <button className="btn btn-sm btn-outline-primary me-2" onClick={() => setEditService(service)}>Edit</button>
-                    <button className="btn btn-sm btn-outline-danger" onClick={() => handleDeleteService(service.id)}>Delete</button>
+                    <button
+                      className="btn btn-sm btn-outline-primary me-2"
+                      onClick={() => setEditService(service)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-sm btn-outline-danger"
+                      onClick={() => handleDeleteService(service.id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </li>
               ))}
@@ -116,7 +115,9 @@ const AdminDashboard = () => {
                   setNewService({ ...newService, price: e.target.value })
                 }
               />
-              <button className="btn btn-primary" onClick={handleAddService}>Add</button>
+              <button className="btn btn-primary" onClick={handleAddService}>
+                Add
+              </button>
             </div>
             {editService && (
               <div className="mt-4">
@@ -136,7 +137,10 @@ const AdminDashboard = () => {
                   placeholder="Description"
                   value={editService.description}
                   onChange={(e) =>
-                    setEditService({ ...editService, description: e.target.value })
+                    setEditService({
+                      ...editService,
+                      description: e.target.value,
+                    })
                   }
                 />
                 <input
@@ -148,7 +152,9 @@ const AdminDashboard = () => {
                     setEditService({ ...editService, price: e.target.value })
                   }
                 />
-                <button className="btn btn-primary" onClick={handleEditService}>Save</button>
+                <button className="btn btn-primary" onClick={handleEditService}>
+                  Save
+                </button>
               </div>
             )}
           </div>
@@ -156,18 +162,36 @@ const AdminDashboard = () => {
             <h2>Bookings</h2>
             <ul className="list-group">
               {bookings.map((booking) => (
-                <li key={booking.id} className="list-group-item d-flex justify-content-between align-items-center">
+                <li
+                  key={booking.id}
+                  className="list-group-item d-flex justify-content-between align-items-center"
+                >
                   <div>
                     <h5 className="mb-1">User: {booking.User.username}</h5>
                     <p className="mb-1">Service: {booking.Service.name}</p>
-                    <p className="mb-1">Date: {new Date(booking.date).toLocaleString()}</p>
+                    <p className="mb-1">
+                      Date: {new Date(booking.date).toLocaleString()}
+                    </p>
                     <small>Status: {booking.status}</small>
                   </div>
                   <div>
-                    <button className="btn btn-sm btn-outline-success me-2" onClick={() => handleUpdateBookingStatus(booking.id, "ready for delivery")}>
+                    <button
+                      className="btn btn-sm btn-outline-success me-2"
+                      onClick={() =>
+                        handleUpdateBookingStatus(
+                          booking.id,
+                          "ready for delivery",
+                        )
+                      }
+                    >
                       Mark as Ready for Delivery
                     </button>
-                    <button className="btn btn-sm btn-outline-success" onClick={() => handleUpdateBookingStatus(booking.id, "completed")}>
+                    <button
+                      className="btn btn-sm btn-outline-success"
+                      onClick={() =>
+                        handleUpdateBookingStatus(booking.id, "completed")
+                      }
+                    >
                       Mark as Completed
                     </button>
                   </div>

@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     path: "/user",
     element: <UserDashboard></UserDashboard>,
   },
-    {
+  {
     path: "*",
     element: <Navigate to="/login" replace />,
   },

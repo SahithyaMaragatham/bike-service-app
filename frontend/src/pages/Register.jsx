@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Appbar from "../component/Appbar";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../constants";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -16,15 +17,12 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://bike-service-app-ahz1.onrender.com/api/users/register",
-        {
-          username,
-          email,
-          mobile,
-          password,
-        }
-      );
+      const response = await axios.post(`${URL}/api/users/register`, {
+        username,
+        email,
+        mobile,
+        password,
+      });
       setUser(response.data);
       setError(null);
       console.log("Registration successful:", response.data);

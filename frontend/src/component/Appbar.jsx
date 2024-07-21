@@ -28,7 +28,7 @@ const Appbar = () => {
 
 const styles = {
   navbar: {
-    backgroundColor: "#343a40", // Dark background
+    backgroundColor: "#343a40",
     color: "white",
     padding: "1rem",
   },

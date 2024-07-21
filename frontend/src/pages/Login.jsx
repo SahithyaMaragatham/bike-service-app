@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Appbar from "../component/Appbar";
+import { URL } from "../constants";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,13 +14,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://bike-service-app-ahz1.onrender.com/api/users/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post(`${URL}/api/users/login`, {
+        email,
+        password,
+      });
       setUser(response.data);
       setError(null);
       console.log("Login successful:", response.data);
@@ -75,7 +73,7 @@ const Login = () => {
                   </button>
                 </form>
                 <p className="mt-3 text-center">
-                  New User? 
+                  New User?
                   <button
                     type="button"
                     className="btn btn-link"

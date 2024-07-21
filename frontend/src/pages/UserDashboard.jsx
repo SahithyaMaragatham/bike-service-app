@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Appbar from "../component/Appbar";
+import { URL } from "../constants";
 
 const UserDashboard = () => {
   const [services, setServices] = useState([]);
@@ -19,9 +20,7 @@ const UserDashboard = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get(
-        "https://bike-service-app-ahz1.onrender.com/api/services"
-      );
+      const response = await axios.get(`${URL}/api/services`);
       setServices(response.data);
     } catch (error) {
       console.error("Error fetching services:", error);
@@ -31,9 +30,7 @@ const UserDashboard = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get(
-        `https://bike-service-app-ahz1.onrender.com/api/bookings/user/${userId}`
-      );
+      const response = await axios.get(`${URL}/api/bookings/user/${userId}`);
       setBookings(response.data);
     } catch (error) {
       console.error("Error fetching bookings:", error);
@@ -44,15 +41,12 @@ const UserDashboard = () => {
   const handleBookService = async (serviceId) => {
     try {
       const bookingDate = new Date().toISOString();
-      await axios.post(
-        "https://bike-service-app-ahz1.onrender.com/api/bookings",
-        {
-          userId,
-          serviceId,
-          date: bookingDate,
-        }
-      );
-      fetchBookings(); // Refresh bookings after successful booking
+      await axios.post(`${URL}/api/bookings`, {
+        userId,
+        serviceId,
+        date: bookingDate,
+      });
+      fetchBookings();
     } catch (error) {
       console.error("Error booking service:", error);
       setError("Failed to book service.");
@@ -73,7 +67,10 @@ const UserDashboard = () => {
             ) : (
               <div className="list-group">
                 {services.map((service) => (
-                  <div key={service.id} className="list-group-item flex-column align-items-start">
+                  <div
+                    key={service.id}
+                    className="list-group-item flex-column align-items-start"
+                  >
                     <div className="d-flex w-100 justify-content-between">
                       <h5 className="mb-1">{service.name}</h5>
                       <button
@@ -97,11 +94,16 @@ const UserDashboard = () => {
             ) : (
               <div className="list-group">
                 {bookings.map((booking) => (
-                  <div key={booking.id} className="list-group-item flex-column align-items-start">
+                  <div
+                    key={booking.id}
+                    className="list-group-item flex-column align-items-start"
+                  >
                     <div className="d-flex w-100 justify-content-between">
                       <h5 className="mb-1">Service: {booking.Service.name}</h5>
                     </div>
-                    <p className="mb-1">Date: {new Date(booking.date).toLocaleString()}</p>
+                    <p className="mb-1">
+                      Date: {new Date(booking.date).toLocaleString()}
+                    </p>
                     <small>Status: {booking.status}</small>
                   </div>
                 ))}
