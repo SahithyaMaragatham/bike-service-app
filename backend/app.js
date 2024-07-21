@@ -13,7 +13,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://main--bike-service-app000.netlify.app/register",
+      "https://main--bike-service-app000.netlify.app",
       "http://localhost:5173",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
