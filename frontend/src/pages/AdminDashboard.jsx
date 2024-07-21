@@ -42,7 +42,7 @@ const AdminDashboard = () => {
 
   const handleEditService = async () => {
     await axios.put(
-      "https://bike-service-app-ahz1.onrender.com/api/services/${editService.id}",
+      `https://bike-service-app-ahz1.onrender.com/api/services/${editService.id}`,
       editService
     );
     fetchServices();
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
 
   const handleDeleteService = async (id) => {
     await axios.delete(
-      "https://bike-service-app-ahz1.onrender.com/api/services/${id}"
+      `https://bike-service-app-ahz1.onrender.com/api/services/${id}`
     );
     fetchServices();
   };
