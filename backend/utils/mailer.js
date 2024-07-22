@@ -1,6 +1,10 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+  throw new Error("Email user or password not set in environment variables");
+}
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -9,7 +13,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendMail = (to, subject, text) => {
+const sendMail = async (to, subject, text) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to,
@@ -17,11 +21,12 @@ exports.sendMail = (to, subject, text) => {
     text,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent: " + info.response);
+  } catch (error) {
+    console.error("Error sending email: ", error);
+  }
 };
+
+module.exports = { sendMail };
