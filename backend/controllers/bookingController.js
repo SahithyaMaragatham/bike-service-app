@@ -11,10 +11,10 @@ exports.createBooking = async (req, res) => {
     const user = await User.findByPk(userId);
     const service = await Service.findByPk(serviceId);
 
-    sendMail(
-      "da.sahithamaragatham@gmail.com",
+    await sendMail(
+      user.email,
       "New Booking",
-      `Booking details: User: ${user.email}, Service: ${service.name}, Date: ${date}`,
+      `Booking details: User: ${user.email}, Service: ${service.name}, Date: ${date}`
     );
 
     res.status(201).json(booking);
@@ -38,7 +38,7 @@ exports.updateBookingStatus = async (req, res) => {
       sendMail(
         user.email,
         "Bike Ready for Delivery",
-        `Your bike is ready for delivery. Booking details: Date: ${booking.date}, Service: ${booking.serviceId}`,
+        `Your bike is ready for delivery. Booking details: Date: ${booking.date}, Service: ${booking.serviceId}`
       );
     }
 
